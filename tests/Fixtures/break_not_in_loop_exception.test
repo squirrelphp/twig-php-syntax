@@ -1,0 +1,8 @@
+--TEST--
+break outside of a loop is not allowed
+--TEMPLATE--
+{% break %}
+--DATA--
+return [];
+--EXCEPTION--
+Twig\Error\SyntaxError: Break tag is only allowed in 'for' or 'foreach' loops in "index.twig" at line 2.

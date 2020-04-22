@@ -1,0 +1,13 @@
+--TEST--
+continue used with a number higher than 1 is not allowed
+--TEMPLATE--
+{% foreach [1,2,3] as value %}
+{% foreach [1,2,3] as valueI %}
+{% continue 2 %}
++{{ value }} {{ valueI }}
+{% endforeach %}
+{% endforeach %}
+--DATA--
+return [];
+--EXCEPTION--
+Twig\Error\SyntaxError: Continue tag cannot be used with a number higher than 1 in "index.twig" at line 4.

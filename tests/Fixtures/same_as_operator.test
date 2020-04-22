@@ -1,0 +1,13 @@
+--TEST--
+=== operator
+--TEMPLATE--
+{% if false === false %}
+3
+{% endif %}
+{% if 0 === false %}
+4
+{% endif %}
+--DATA--
+return [];
+--EXPECT--
+3

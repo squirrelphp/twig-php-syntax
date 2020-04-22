@@ -1,0 +1,65 @@
+{
+    "commit-msg": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\CaptainHook\\App\\Hook\\Message\\Action\\Beams",
+                "options": {
+                    "subjectLength": 50,
+                    "bodyLineLength": 72
+                },
+                "conditions": []
+            }
+        ]
+    },
+    "pre-push": {
+        "enabled": false,
+        "actions": []
+    },
+    "pre-commit": {
+        "enabled": true,
+        "actions": [
+            {
+                "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "composer phpunit",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "composer phpstan",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "composer psalm",
+                "options": [],
+                "conditions": []
+            },
+            {
+                "action": "composer phpcs",
+                "options": [],
+                "conditions": []
+            }
+        ]
+    },
+    "prepare-commit-msg": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-commit": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-merge": {
+        "enabled": false,
+        "actions": []
+    },
+    "post-checkout": {
+        "enabled": false,
+        "actions": []
+    }
+}

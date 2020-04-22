@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<ruleset name="IQ">
+    <description>PSR12 with some additional useful sniffs</description>
+
+    <!-- Include the whole PSR-12 standard except for line length -->
+    <rule ref="PSR12">
+        <exclude name="Generic.Files.LineLength"/>
+    </rule>
+
+
+    <config name="installed_paths" value="../../slevomat/coding-standard"/>
+
+    <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowContinueWithoutIntegerOperandInSwitch"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowEmpty"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+        <properties>
+            <property name="searchAnnotations" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
+    <rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations">
+        <properties>
+            <property name="forbiddenAnnotations" type="array">
+                <element value="@author"/>
+                <element value="@created"/>
+                <element value="@copyright"/>
+                <element value="@license"/>
+                <element value="@package"/>
+                <element value="@version"/>
+            </property>
+        </properties>
+    </rule>
+    <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
+</ruleset>

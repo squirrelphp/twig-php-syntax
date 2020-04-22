@@ -1,0 +1,34 @@
+--TEST--
+break language tag to end loops
+--TEMPLATE--
+{% foreach [1,2,3] as value %}
+{% if loop.index == 2 %}
+{% break %}
+{% endif %}
++{{ value }}
+{% endforeach %}
+{% foreach [1,2,3,4,5,6] as value %}
+{% if loop.last == true %}
+{% break %}
+{% endif %}
++{{ value }}
+{% endforeach %}
+{% foreach [1,2,3] as value1 %}
+{% foreach [4,5,6] as value2 %}
+{% if loop.index == 3 %}
+{% break 2 %}
+{% endif %}
++{{ value1 }} {{ value2 }}
+{% endforeach %}
+{% endforeach %}
+--DATA--
+return [];
+--EXPECT--
++1
++1
++2
++3
++4
++5
++1 4
++1 5

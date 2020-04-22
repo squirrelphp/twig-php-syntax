@@ -1,0 +1,30 @@
+--TEST--
+foreach language structure
+--TEMPLATE--
+{% foreach [1,2,3] as value %}
++{{ value }}
+{% endforeach %}
+{% foreach {'one': 1, 'two': 'hey', 3: 'three'} as key => value %}
+{{ key }} - {{ value }}
+{% endforeach %}
+{% foreach [] as value %}
+never executed
+{% else %}
+array is empty!
+{% endforeach %}
+{% foreach [1,2,3] as not %}
++1
+{% endforeach %}
+--DATA--
+return [];
+--EXPECT--
++1
++2
++3
+one - 1
+two - hey
+3 - three
+array is empty!
++1
++1
++1

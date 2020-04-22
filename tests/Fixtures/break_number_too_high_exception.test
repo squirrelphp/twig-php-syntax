@@ -1,0 +1,10 @@
+--TEST--
+break with a number higher than the number of loops
+--TEMPLATE--
+{% foreach [1,2,3] as value %}
+{% break 2 %}
+{% endforeach %}
+--DATA--
+return [];
+--EXCEPTION--
+Twig\Error\SyntaxError: Break tag uses a loop number higher than the actual loops in this context - you are using the number 2 but in the given context the maximum number is 1 in "index.twig" at line 4.

@@ -1,0 +1,13 @@
+--TEST--
+"is false" test
+--TEMPLATE--
+{% if false is false %}
+3
+{% endif %}
+{% if 0 is false %}
+4
+{% endif %}
+--DATA--
+return [];
+--EXPECT--
+3

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.11.2@d470903722cfcbc1cd04744c5491d3e6d13ec3d9">
+  <file src="src/TokenParser/BreakOrContinueTokenParser.php">
+    <InternalMethod occurrences="3">
+      <code>getSourceContext</code>
+      <code>getSourceContext</code>
+      <code>getSourceContext</code>
+    </InternalMethod>
+  </file>
+  <file src="src/TokenParser/ForeachTokenParser.php">
+    <InternalMethod occurrences="2">
+      <code>parseExpression</code>
+      <code>getSourceContext</code>
+    </InternalMethod>
+  </file>
+</files>

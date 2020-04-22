@@ -1,0 +1,10 @@
+--TEST--
+foreach variable cannot be true or false or none or null
+--TEMPLATE--
+{% foreach [1,2,3] as true %}
++{{ value }}
+{% endforeach %}
+--DATA--
+return [];
+--EXCEPTION--
+Twig\Error\SyntaxError: You cannot assign a value to "true" in "index.twig" at line 2.
