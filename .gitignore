@@ -2,7 +2,9 @@
 /composer.lock
 /vendor
 /vendor-bin/**/vendor
-/.phpunit*
+/vendor-bin/**/composer.lock
+/.phpunit.result.cache
+/.phpcs-cache
 /tests/_output
 /tests/_reports
 /build

@@ -7,7 +7,6 @@
         <exclude name="Generic.Files.LineLength"/>
     </rule>
 
-
     <config name="installed_paths" value="../../slevomat/coding-standard"/>
 
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
