@@ -1,0 +1,38 @@
+--TEST--
+"is object" test
+--TEMPLATE--
+{% if [1, 2, 3] is object %}
+1
+{% endif %}
+{% if 1 is object %}
+2
+{% endif %}
+{% if true is object %}
+3
+{% endif %}
+{% if "string" is object %}
+4
+{% endif %}
+{% if {dada: true, other: 5} is object %}
+5
+{% endif %}
+{% if obj is object %}
+6
+{% endif %}
+{% if func is object %}
+7
+{% endif %}
+{% if 3.7 is object %}
+8
+{% endif %}
+{% if false is object %}
+9
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
+--EXPECT--
+6
+7

@@ -1,0 +1,38 @@
+--TEST--
+"is boolean" test
+--TEMPLATE--
+{% if [1, 2, 3] is boolean %}
+1
+{% endif %}
+{% if 1 is boolean %}
+2
+{% endif %}
+{% if true is boolean %}
+3
+{% endif %}
+{% if "string" is boolean %}
+4
+{% endif %}
+{% if {dada: true, other: 5} is boolean %}
+5
+{% endif %}
+{% if obj is boolean %}
+6
+{% endif %}
+{% if func is boolean %}
+7
+{% endif %}
+{% if 3.7 is boolean %}
+8
+{% endif %}
+{% if false is boolean %}
+9
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
+--EXPECT--
+3
+9

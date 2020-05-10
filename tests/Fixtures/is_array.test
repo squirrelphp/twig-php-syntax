@@ -1,0 +1,38 @@
+--TEST--
+"is array" test
+--TEMPLATE--
+{% if [1, 2, 3] is array %}
+1
+{% endif %}
+{% if 1 is array %}
+2
+{% endif %}
+{% if true is array %}
+3
+{% endif %}
+{% if "string" is array %}
+4
+{% endif %}
+{% if {dada: true, other: 5} is array %}
+5
+{% endif %}
+{% if obj is array %}
+6
+{% endif %}
+{% if func is array %}
+7
+{% endif %}
+{% if 3.7 is array %}
+8
+{% endif %}
+{% if false is array %}
+9
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
+--EXPECT--
+1
+5

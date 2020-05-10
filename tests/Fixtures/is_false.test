@@ -1,13 +1,37 @@
 --TEST--
 "is false" test
 --TEMPLATE--
-{% if false is false %}
+{% if [1, 2, 3] is false %}
+1
+{% endif %}
+{% if 1 is false %}
+2
+{% endif %}
+{% if true is false %}
 3
 {% endif %}
-{% if 0 is false %}
+{% if "string" is false %}
 4
 {% endif %}
+{% if {dada: true, other: 5} is false %}
+5
+{% endif %}
+{% if obj is false %}
+6
+{% endif %}
+{% if func is false %}
+7
+{% endif %}
+{% if 3.7 is false %}
+8
+{% endif %}
+{% if false is false %}
+9
+{% endif %}
 --DATA--
-return [];
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
 --EXPECT--
-3
+9

@@ -1,0 +1,37 @@
+--TEST--
+"is float" test
+--TEMPLATE--
+{% if [1, 2, 3] is float %}
+1
+{% endif %}
+{% if 1 is float %}
+2
+{% endif %}
+{% if true is float %}
+3
+{% endif %}
+{% if "string" is float %}
+4
+{% endif %}
+{% if {dada: true, other: 5} is float %}
+5
+{% endif %}
+{% if obj is float %}
+6
+{% endif %}
+{% if func is float %}
+7
+{% endif %}
+{% if 3.7 is float %}
+8
+{% endif %}
+{% if false is float %}
+9
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
+--EXPECT--
+8

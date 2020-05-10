@@ -1,0 +1,37 @@
+--TEST--
+"is integer" test
+--TEMPLATE--
+{% if [1, 2, 3] is integer %}
+1
+{% endif %}
+{% if 1 is integer %}
+2
+{% endif %}
+{% if true is integer %}
+3
+{% endif %}
+{% if "string" is integer %}
+4
+{% endif %}
+{% if {dada: true, other: 5} is integer %}
+5
+{% endif %}
+{% if obj is integer %}
+6
+{% endif %}
+{% if func is integer %}
+7
+{% endif %}
+{% if 3.7 is integer %}
+8
+{% endif %}
+{% if false is integer %}
+9
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
+--EXPECT--
+2

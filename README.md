@@ -92,15 +92,56 @@ You can use `break` with a number to break out of multiple loops, just like in P
 
 While you can often circumvent the usage of `break` and `continue` in twig, it sometimes leads to additional nesting and more complicated code. Just one `break` or `continue` can clarify behavior and intent in these instances. Yet I would advise to use `break` and `continue` sparingly.
 
-### is true / is false tests
+### Variable type tests (string, array, true, callable, etc.)
 
-Adds a strict true/false test, so expressions become a bit more readable:
+Adds tests known from PHP, so you can test a value for being:
+
+ - an array (like `is_array`)
+ - a boolean (like `is_bool`)
+ - a callable (like `is_callable`)
+ - a float (like `is_float`)
+ - an integer (like `is_int`)
+ - an object (like `is_object`)
+ - a scalar (integer, float, string or boolean, like `is_scalar`)
+ - a string (like `is_string`)
+ - true (like `=== true`)
+ - false (like `=== false`)
+
+ It uses the mentioned PHP functions / comparisons internally, so you have the same behavior as in PHP.
 
 ```twig
 {% if someflag is true %} {# instead of {% if someflag is same as(true) %} #}
 {% endif %}
 
 {% if someflag is false %} {# instead of {% if someflag is same as(false) %} #}
+{% endif %}
+
+{% if somevar is string %} {# no equivalent in twig %} #}
+{% endif %}
+
+{% if somevar is scalar %} {# no equivalent in twig %} #}
+{% endif %}
+
+{% if somevar is object %} {# no equivalent in twig %} #}
+{% endif %}
+
+{% if somevar is integer %} {# no equivalent in twig %} #}
+{% endif %}
+{% if somevar is int %} {# same as integer test above, alternate way to write it %} #}
+{% endif %}
+
+{% if somevar is float %} {# no equivalent in twig %} #}
+{% endif %}
+
+{% if somevar is callable %} {# no equivalent in twig %} #}
+{% endif %}
+
+{% if somevar is boolean %} {# no equivalent in twig %} #}
+{% endif %}
+{% if somevar is bool %} {# same as boolean test above, alternate way to write it %} #}
+{% endif %}
+
+{% if somevar is array %} {# no equivalent in twig %} #}
 {% endif %}
 ```
 

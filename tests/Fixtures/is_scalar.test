@@ -1,0 +1,41 @@
+--TEST--
+"is scalar" test
+--TEMPLATE--
+{% if [1, 2, 3] is scalar %}
+1
+{% endif %}
+{% if 1 is scalar %}
+2
+{% endif %}
+{% if true is scalar %}
+3
+{% endif %}
+{% if "string" is scalar %}
+4
+{% endif %}
+{% if {dada: true, other: 5} is scalar %}
+5
+{% endif %}
+{% if obj is scalar %}
+6
+{% endif %}
+{% if func is scalar %}
+7
+{% endif %}
+{% if 3.7 is scalar %}
+8
+{% endif %}
+{% if false is scalar %}
+9
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'func' => function() { return 5; },
+];
+--EXPECT--
+2
+3
+4
+8
+9
