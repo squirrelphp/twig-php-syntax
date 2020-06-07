@@ -1,0 +1,21 @@
+--TEST--
+"strtotime" filter test
+--TEMPLATE--
+{% if "2020-06-06T18:38:14+00:00"|strtotime is same as(1591468694) %}
+1
+{% endif %}
+{% if "2020-06-06T18:38:14+00:00"|strtotime|date('Y-m-d') is same as("2020-06-06") %}
+2
+{% endif %}
+{% if "2020-06-06T18:38:14+00:00"|strtotime is integer %}
+3
+{% endif %}
+{% if "2020-06-06T18:38:14+00:00"|strtotime is string %}
+4
+{% endif %}
+--DATA--
+return [];
+--EXPECT--
+1
+2
+3

@@ -21,6 +21,7 @@ use Twig\ExpressionParser;
 use Twig\Extension\AbstractExtension;
 use Twig\Node\Expression\Binary\AndBinary;
 use Twig\Node\Expression\Binary\OrBinary;
+use Twig\TwigFilter;
 use Twig\TwigTest;
 
 class PhpSyntaxExtension extends AbstractExtension
@@ -31,6 +32,23 @@ class PhpSyntaxExtension extends AbstractExtension
             new ForeachTokenParser(),
             new BreakTokenParser(),
             new ContinueTokenParser(),
+        ];
+    }
+
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('strtotime', function (string $time, ?int $now = null): int {
+                $timestamp = \strtotime($time, $now ?? time());
+
+                if ($timestamp === false) {
+                    throw new \InvalidArgumentException(
+                        'Given time string for strtotime seems to be invalid: ' . $time
+                    );
+                }
+
+                return $timestamp;
+            }),
         ];
     }
 

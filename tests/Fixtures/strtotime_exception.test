@@ -1,0 +1,10 @@
+--TEST--
+"strtotime" filter test
+--TEMPLATE--
+{% if "invalid"|strtotime is integer %}
+3
+{% endif %}
+--DATA--
+return [];
+--EXCEPTION--
+Twig\Error\RuntimeError: An exception has been thrown during the rendering of a template ("Given time string for strtotime seems to be invalid: invalid") in "index.twig" at line 2.
