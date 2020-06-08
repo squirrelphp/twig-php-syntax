@@ -108,7 +108,18 @@ Twig uses `for` to create loops, with a slightly different syntax compared to `f
 {% endforeach %}
 ```
 
-Internally it behaves the exact same way as `for`: it actually creates ForNode elements, so you have the same functionality like in `for` loops, including the `loop` variable.
+Internally it behaves the exact same way as `for`: it actually creates ForNode elements, so you have the same functionality like in `for` loops, including [the `loop` variable](https://twig.symfony.com/doc/3.x/tags/for.html#the-loop-variable) and `else`. `else` works the same as with `for`:
+
+```twig
+{% foreach list as sublist %}
+  {% foreach sublist as key => value %}
+  {% else %}
+    Array "sublist" is empty / no iteration took place
+  {% endforeach %}
+{% else %}
+  Array "list" is empty / no iteration took place
+{% endforeach %}
+```
 
 ### break and continue
 
