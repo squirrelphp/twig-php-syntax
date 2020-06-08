@@ -1,0 +1,41 @@
+--TEST--
+"floatval" filter test
+--TEMPLATE--
+{% if '1'|floatval === 1.0 %}
+1
+{% endif %}
+{% if '1'|floatval === '1' %}
+2
+{% endif %}
+{% if true|floatval === 1.0 %}
+3
+{% endif %}
+{% if tostringobj|floatval === 5.0 %}
+4
+{% endif %}
+{% if 1.7|floatval === 1.7 %}
+5
+{% endif %}
+{% if '5.7'|floatval === 5.7 %}
+6
+{% endif %}
+{% if null|floatval === 0.0 %}
+7
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'tostringobj' => new class {
+    public function __toString()
+    {
+      return '5';
+    }
+  },
+];
+--EXPECT--
+1
+3
+4
+5
+6
+7

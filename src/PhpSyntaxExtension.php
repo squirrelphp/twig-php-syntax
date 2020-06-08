@@ -49,7 +49,62 @@ class PhpSyntaxExtension extends AbstractExtension
 
                 return $timestamp;
             }),
+            new TwigFilter('intval', /** @param mixed $var */ function ($var): int {
+                if (\is_int($var)) {
+                    return $var;
+                }
+
+                $var = $this->validateType($var);
+
+                return \intval($var);
+            }),
+            new TwigFilter('floatval', /** @param mixed $var */ function ($var): float {
+                if (\is_float($var)) {
+                    return $var;
+                }
+
+                $var = $this->validateType($var);
+
+                return \floatval($var);
+            }),
+            new TwigFilter('strval', /** @param mixed $var */ function ($var): string {
+                if (\is_string($var)) {
+                    return $var;
+                }
+
+                $var = $this->validateType($var);
+
+                return \strval($var);
+            }),
+            new TwigFilter('boolval', /** @param mixed $var */ function ($var): bool {
+                if (\is_bool($var)) {
+                    return $var;
+                }
+
+                $var = $this->validateType($var);
+
+                return \boolval($var);
+            }),
         ];
+    }
+
+    /**
+     * @param mixed $var
+     * @return string|int|float|bool|null
+     */
+    private function validateType($var)
+    {
+        if (\is_object($var) && \method_exists($var, '__toString')) {
+            return $var->__toString();
+        }
+
+        if (!\is_scalar($var) && $var !== null) {
+            throw new \InvalidArgumentException(
+                'Non-scalar value given to intval/floatval/strval/boolval filter'
+            );
+        }
+
+        return $var;
     }
 
     public function getTests(): array

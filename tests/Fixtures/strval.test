@@ -1,0 +1,41 @@
+--TEST--
+"strval" filter test
+--TEMPLATE--
+{% if 1|strval === '1' %}
+1
+{% endif %}
+{% if 1|strval === 1 %}
+2
+{% endif %}
+{% if true|strval === '1' %}
+3
+{% endif %}
+{% if tostringobj|strval === '5' %}
+4
+{% endif %}
+{% if 1.7|strval === '1.7' %}
+5
+{% endif %}
+{% if 'dada'|strval === 'dada' %}
+6
+{% endif %}
+{% if null|strval === '' %}
+7
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+  'tostringobj' => new class {
+    public function __toString()
+    {
+      return '5';
+    }
+  },
+];
+--EXPECT--
+1
+3
+4
+5
+6
+7
