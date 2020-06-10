@@ -4,6 +4,8 @@ env:
         - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
 language: php
 php:
+    - '7.2'
+    - '7.3'
     - '7.4'
 
 before_script:
