@@ -7,7 +7,10 @@ use Twig\Node\Node;
 
 class BreakNode extends Node
 {
-    private int $loopNumber = 1;
+    /**
+     * @var int
+     */
+    private $loopNumber = 1;
 
     public function __construct(int $loopNumber, int $lineno, string $tag)
     {
