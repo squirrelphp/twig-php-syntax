@@ -23,6 +23,8 @@ class ContinueNode extends Node
     {
         $compiler
             ->addDebugInfo($this)
+            ->write("if (isset(\$context['loop'])) {\n")
+            ->indent()
             // Taken from ForLoopNode - need to do this otherwise the continue skips it
             ->write("++\$context['loop']['index0'];\n")
             ->write("++\$context['loop']['index'];\n")
@@ -32,6 +34,9 @@ class ContinueNode extends Node
             ->write("--\$context['loop']['revindex0'];\n")
             ->write("--\$context['loop']['revindex'];\n")
             ->write("\$context['loop']['last'] = 0 === \$context['loop']['revindex0'];\n")
+            ->outdent()
+            ->write("}\n")
+            // End taken from FoorLoopNode
             ->outdent()
             ->write("}\n")
             // Do the actual continue operation
