@@ -26,10 +26,7 @@
         "phpunit/phpunit": "^8.0|^9.0"
     },
     "config": {
-        "sort-packages": false,
-        "platform": {
-            "php": "7.2.5"
-        }
+        "sort-packages": false
     },
     "autoload": {
         "psr-4": {
