@@ -37,4 +37,24 @@
         </properties>
     </rule>
     <rule ref="SlevomatCodingStandard.Commenting.EmptyComment"/>
+    <rule ref="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation"/>
+    <rule ref="SlevomatCodingStandard.Functions.StrictCall"/>
+    <rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators"/>
+    <rule ref="SlevomatCodingStandard.PHP.DisallowReference"/>
+    <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
+    <rule ref="SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable"/>
+    <rule ref="SlevomatCodingStandard.ControlStructures.NewWithParentheses"/>
+    <rule ref="SlevomatCodingStandard.Functions.DisallowEmptyFunction"/>
+    <!--<rule ref="SlevomatCodingStandard.Functions.TrailingCommaInCall"/>-->
+    <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
+    <rule ref="SlevomatCodingStandard.PHP.ShortList"/>
+    <rule ref="SlevomatCodingStandard.PHP.TypeCast"/>
+    <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing"/>
+    <rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHintSpacing"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine"/>
+    <rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash"/>
+    <rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
+    <rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding"/>
 </ruleset>

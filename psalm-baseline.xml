@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.11.2@d470903722cfcbc1cd04744c5491d3e6d13ec3d9">
+<files psalm-version="4.3.1@2feba22a005a18bf31d4c7b9bdb9252c73897476">
+  <file src="src/PhpSyntaxExtension.php">
+    <InternalClass occurrences="4">
+      <code>ExpressionParser::OPERATOR_LEFT</code>
+      <code>ExpressionParser::OPERATOR_LEFT</code>
+      <code>ExpressionParser::OPERATOR_LEFT</code>
+      <code>ExpressionParser::OPERATOR_LEFT</code>
+    </InternalClass>
+  </file>
   <file src="src/TokenParser/BreakOrContinueTokenParser.php">
     <InternalMethod occurrences="3">
       <code>getSourceContext</code>
       <code>getSourceContext</code>
       <code>getSourceContext</code>
     </InternalMethod>
+    <UnsafeInstantiation occurrences="1">
+      <code>new $nodeClass($loopNumber, $lineno, $this-&gt;getTag())</code>
+    </UnsafeInstantiation>
   </file>
   <file src="src/TokenParser/ForeachTokenParser.php">
     <InternalMethod occurrences="2">
-      <code>parseExpression</code>
       <code>getSourceContext</code>
+      <code>parseExpression</code>
     </InternalMethod>
   </file>
 </files>

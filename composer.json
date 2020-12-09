@@ -22,7 +22,8 @@
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.3",
-        "captainhook/plugin-composer": "^5.0"
+        "captainhook/plugin-composer": "^5.0",
+        "phpunit/phpunit": "^8.0|^9.0"
     },
     "config": {
         "sort-packages": false,
@@ -42,14 +43,14 @@
     },
     "scripts": {
         "phpstan": "vendor/bin/phpstan analyse",
+        "phpstan_full": "vendor/bin/phpstan clear-result-cache && vendor/bin/phpstan analyse",
         "phpstan_base": "vendor/bin/phpstan analyse --generate-baseline",
-        "phpstan_clear": "vendor/bin/phpstan clear-result-cache",
-        "psalm": "vendor/bin/psalm --show-info=false --diff",
-        "psalm_full": "vendor/bin/psalm --show-info=false",
+        "psalm": "vendor/bin/psalm --show-info=false",
+        "psalm_full": "vendor/bin/psalm --clear-cache && vendor/bin/psalm --show-info=false",
         "psalm_base": "vendor/bin/psalm --set-baseline=psalm-baseline.xml",
         "phpunit": "vendor/bin/phpunit --colors=always",
         "phpunit_clover": "vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml",
-        "codecoverage": "vendor/bin/phpunit --coverage-html tests/_reports",
+        "coverage": "vendor/bin/phpunit --coverage-html tests/_reports",
         "phpcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --cache=.phpcs-cache --colors src tests",
         "phpcsfix": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --cache=.phpcs-cache src tests",
         "binupdate": "@composer bin all update --ansi",
