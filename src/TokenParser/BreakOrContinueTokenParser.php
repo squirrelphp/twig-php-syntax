@@ -33,40 +33,37 @@ abstract class BreakOrContinueTokenParser extends AbstractTokenParser
 
         $stream->expect(Token::BLOCK_END_TYPE);
 
-        // Trick to check if we are currently in a loop.
-        $currentForLoop = 0;
+        // Count how many loops are starting minus the loops ending
+        $loopCount = 0;
 
         for ($i = 1; true; $i++) {
-            // If we look back too far in the stream twig will throw a SyntaxError
-            // and there we often get another error because an illegal offset is accessed
-            // when creating the SyntaxError, so we catch all throwables to be safe
             try {
-                // We look back by using a negative integer, which is not intended by twig and seems
-                // a bit hacky, but does work for our purposes currently and gives us the opportunity
-                // to detect illegal usages of break/continue outside of loops or in not-enough-nested contexts
-                $token = $stream->look(-$i);
-            } catch (\Throwable $e) {
+                // Look ahead to find for and endfor tokens to make sure
+                // there are more loops ending than starting
+                $token = $stream->look($i);
+            } catch (SyntaxError $e) {
+                // End of template, leading to SyntaxError
                 break;
             }
 
             // Count both "for" loops and "foreach" loops
             if ($token->test(Token::NAME_TYPE, 'for') || $token->test(Token::NAME_TYPE, 'foreach')) {
-                $currentForLoop++;
+                $loopCount++;
             } elseif ($token->test(Token::NAME_TYPE, 'endfor') || $token->test(Token::NAME_TYPE, 'endforeach')) {
-                $currentForLoop--;
+                $loopCount--;
             }
         }
 
-
-        if ($currentForLoop < 1) {
+        // There should be more loops ending than starting, making loopCount negative
+        if ($loopCount >= 0) {
             throw new SyntaxError(
                 \ucfirst($this->getTag()) . ' tag is only allowed in \'for\' or \'foreach\' loops.',
                 $stream->getCurrent()->getLine(),
                 $stream->getSourceContext()
             );
-        } elseif ($currentForLoop < $loopNumber) {
+        } elseif (\abs($loopCount) < $loopNumber) {
             throw new SyntaxError(
-                \ucfirst($this->getTag()) . ' tag uses a loop number higher than the actual loops in this context - you are using the number ' . $loopNumber . ' but in the given context the maximum number is ' . $currentForLoop . '.',
+                \ucfirst($this->getTag()) . ' tag uses a loop number higher than the actual loops in this context - you are using the number ' . $loopNumber . ' but in the given context the maximum number is ' . \abs($loopCount) . '.',
                 $stream->getCurrent()->getLine(),
                 $stream->getSourceContext()
             );

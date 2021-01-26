@@ -47,7 +47,7 @@
         "psalm_base": "vendor/bin/psalm --set-baseline=psalm-baseline.xml",
         "phpunit": "vendor/bin/phpunit --colors=always",
         "phpunit_clover": "vendor/bin/phpunit --coverage-text --coverage-clover build/logs/clover.xml",
-        "coverage": "vendor/bin/phpunit --coverage-html tests/_reports",
+        "coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html tests/_reports",
         "phpcs": "vendor/bin/phpcs --standard=ruleset.xml --extensions=php --cache=.phpcs-cache --colors src tests",
         "phpcsfix": "vendor/bin/phpcbf --standard=ruleset.xml --extensions=php --cache=.phpcs-cache src tests",
         "binupdate": "@composer bin all update --ansi",
