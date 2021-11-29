@@ -35,7 +35,7 @@ class PhpSyntaxExtension extends AbstractExtension
         ];
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('strtotime', function (string $time, ?int $now = null): int {

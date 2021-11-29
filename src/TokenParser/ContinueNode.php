@@ -19,7 +19,7 @@ class ContinueNode extends Node
         $this->loopNumber = $loopNumber;
     }
 
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler
             ->addDebugInfo($this)
