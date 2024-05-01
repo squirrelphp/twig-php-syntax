@@ -2,9 +2,11 @@
 
 namespace Squirrel\TwigPhpSyntax\TokenParser;
 
+use Twig\Attribute\YieldReady;
 use Twig\Compiler;
 use Twig\Node\Node;
 
+#[YieldReady]
 class BreakNode extends Node
 {
     /**

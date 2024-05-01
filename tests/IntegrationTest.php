@@ -7,14 +7,14 @@ use Twig\Test\IntegrationTestCase;
 
 class IntegrationTest extends IntegrationTestCase
 {
-    public function getExtensions()
+    public function getExtensions(): array
     {
         return [
             new PhpSyntaxExtension(),
         ];
     }
 
-    public function getFixturesDir()
+    public function getFixturesDir(): string
     {
         return __DIR__ . '/Fixtures/';
     }
