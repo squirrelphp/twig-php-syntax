@@ -9,6 +9,8 @@ use Twig\TokenParser\AbstractTokenParser;
 
 abstract class BreakOrContinueTokenParser extends AbstractTokenParser
 {
+    abstract protected function getNodeObject(int $loopNumber, int $lineno): Node;
+
     public function parse(Token $token): Node
     {
         $lineno = $token->getLine();
@@ -19,15 +21,15 @@ abstract class BreakOrContinueTokenParser extends AbstractTokenParser
 
         $numberToken = $stream->nextIf(Token::NUMBER_TYPE);
 
-        if (isset($numberToken)) {
-            $loopNumber = $numberToken->getValue();
+        if ($numberToken !== null) {
+            $loopNumber = (int)$numberToken->getValue();
         }
 
         if ($loopNumber > 1 && $this->getTag() === 'continue') {
             throw new SyntaxError(
                 \ucfirst($this->getTag()) . ' tag cannot be used with a number higher than 1.',
                 $stream->getCurrent()->getLine(),
-                $stream->getSourceContext()
+                $stream->getSourceContext(),
             );
         }
 
@@ -59,21 +61,16 @@ abstract class BreakOrContinueTokenParser extends AbstractTokenParser
             throw new SyntaxError(
                 \ucfirst($this->getTag()) . ' tag is only allowed in \'for\' or \'foreach\' loops.',
                 $stream->getCurrent()->getLine(),
-                $stream->getSourceContext()
+                $stream->getSourceContext(),
             );
         } elseif (\abs($loopCount) < $loopNumber) {
             throw new SyntaxError(
                 \ucfirst($this->getTag()) . ' tag uses a loop number higher than the actual loops in this context - you are using the number ' . $loopNumber . ' but in the given context the maximum number is ' . \abs($loopCount) . '.',
                 $stream->getCurrent()->getLine(),
-                $stream->getSourceContext()
+                $stream->getSourceContext(),
             );
         }
 
-        /**
-         * @var class-string<Node> $nodeClass
-         */
-        $nodeClass = __NAMESPACE__ . '\\' . \ucfirst($this->getTag()) . 'Node';
-
-        return new $nodeClass($loopNumber, $lineno, $this->getTag());
+        return $this->getNodeObject($loopNumber, $lineno);
     }
 }

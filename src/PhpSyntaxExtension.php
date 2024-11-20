@@ -43,56 +43,52 @@ class PhpSyntaxExtension extends AbstractExtension
 
                 if ($timestamp === false) {
                     throw new \InvalidArgumentException(
-                        'Given time string for strtotime seems to be invalid: ' . $time
+                        'Given time string for strtotime seems to be invalid: ' . $time,
                     );
                 }
 
                 return $timestamp;
             }),
-            new TwigFilter('intval', /** @param mixed $var */ function ($var): int {
+            new TwigFilter('intval', function (mixed $var): int {
                 if (\is_int($var)) {
                     return $var;
                 }
 
-                $var = $this->validateType($var);
+                $var = $this->validateType($var, 'intval');
 
                 return \intval($var);
             }),
-            new TwigFilter('floatval', /** @param mixed $var */ function ($var): float {
+            new TwigFilter('floatval', function (mixed $var): float {
                 if (\is_float($var)) {
                     return $var;
                 }
 
-                $var = $this->validateType($var);
+                $var = $this->validateType($var, 'floatval');
 
                 return \floatval($var);
             }),
-            new TwigFilter('strval', /** @param mixed $var */ function ($var): string {
+            new TwigFilter('strval', function (mixed $var): string {
                 if (\is_string($var)) {
                     return $var;
                 }
 
-                $var = $this->validateType($var);
+                $var = $this->validateType($var, 'strval');
 
                 return \strval($var);
             }),
-            new TwigFilter('boolval', /** @param mixed $var */ function ($var): bool {
+            new TwigFilter('boolval', function (mixed $var): bool {
                 if (\is_bool($var)) {
                     return $var;
                 }
 
-                $var = $this->validateType($var);
+                $var = $this->validateType($var, 'boolval');
 
                 return \boolval($var);
             }),
         ];
     }
 
-    /**
-     * @param mixed $var
-     * @return string|int|float|bool|null
-     */
-    private function validateType($var)
+    private function validateType(mixed $var, string $functionName): string|int|float|bool|null
     {
         if (\is_object($var) && \method_exists($var, '__toString')) {
             return $var->__toString();
@@ -100,7 +96,7 @@ class PhpSyntaxExtension extends AbstractExtension
 
         if (!\is_scalar($var) && $var !== null) {
             throw new \InvalidArgumentException(
-                'Non-scalar value given to intval/floatval/strval/boolval filter'
+                'Non-scalar value given to ' . $functionName . ' filter',
             );
         }
 

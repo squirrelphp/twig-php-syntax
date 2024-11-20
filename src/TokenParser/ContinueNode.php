@@ -9,14 +9,11 @@ use Twig\Node\Node;
 #[YieldReady]
 class ContinueNode extends Node
 {
-    /**
-     * @var int
-     */
-    private $loopNumber = 1;
+    private int $loopNumber = 1;
 
-    public function __construct(int $loopNumber, int $lineno, string $tag)
+    public function __construct(int $loopNumber, int $lineno)
     {
-        parent::__construct([], [], $lineno, $tag);
+        parent::__construct([], [], $lineno);
 
         $this->loopNumber = $loopNumber;
     }

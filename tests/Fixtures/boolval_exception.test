@@ -1,0 +1,12 @@
+--TEST--
+"boolval" filter exception test with non-scalar value
+--TEMPLATE--
+{% if obj|boolval === true %}
+3
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+];
+--EXCEPTION--
+Twig\Error\RuntimeError: An exception has been thrown during the rendering of a template ("Non-scalar value given to boolval filter") in "index.twig" at line 2.

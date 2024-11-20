@@ -1,0 +1,12 @@
+--TEST--
+"intval" filter exception test with non-scalar value
+--TEMPLATE--
+{% if obj|intval === 1 %}
+3
+{% endif %}
+--DATA--
+return [
+  'obj' => new \stdClass(),
+];
+--EXCEPTION--
+Twig\Error\RuntimeError: An exception has been thrown during the rendering of a template ("Non-scalar value given to intval filter") in "index.twig" at line 2.

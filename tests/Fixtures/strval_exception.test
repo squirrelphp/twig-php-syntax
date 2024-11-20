@@ -1,5 +1,5 @@
 --TEST--
-"strtotime" filter exception test with non-scalar value
+"strval" filter exception test with non-scalar value
 --TEMPLATE--
 {% if obj|strval === '' %}
 3
@@ -9,4 +9,4 @@ return [
   'obj' => new \stdClass(),
 ];
 --EXCEPTION--
-Twig\Error\RuntimeError: An exception has been thrown during the rendering of a template ("Non-scalar value given to intval/floatval/strval/boolval filter") in "index.twig" at line 2.
+Twig\Error\RuntimeError: An exception has been thrown during the rendering of a template ("Non-scalar value given to strval filter") in "index.twig" at line 2.

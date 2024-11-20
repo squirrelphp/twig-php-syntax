@@ -1,0 +1,48 @@
+#!/usr/bin/env php
+<?php
+error_reporting(E_ALL); // Report everything, even notices
+set_time_limit(0); // No time limit for console commands
+
+$projectDir = dirname(__DIR__);
+
+$composerRunType = $_SERVER['argv'][1] ?? 'outdated';
+
+require $projectDir.'/vendor/autoload.php';
+
+$sourceFinder = new \Symfony\Component\Finder\Finder();
+$sourceFinder->in($projectDir . '/vendor-bin')->directories()->depth(0)->sortByName();
+
+/** @var array<string, \Symfony\Component\Process\Process> $tools */
+$tools = [];
+
+foreach ($sourceFinder as $directory) {
+    $toolName = $directory->getFilename();
+
+    $options = [
+        '--ansi',
+    ];
+
+    if ($composerRunType === 'update') {
+        $options[] = '--no-progress';
+    }
+
+    $process = new \Symfony\Component\Process\Process(['composer', $composerRunType, ...$options]);
+    if (isset($_SERVER['COMPOSER_CACHE_DIR'])) {
+        $process->setEnv(['COMPOSER_CACHE_DIR' => $_SERVER['COMPOSER_CACHE_DIR']]);
+    }
+    $process->setWorkingDirectory($projectDir . '/vendor-bin/' . $toolName);
+    $process->start();
+    $process->wait();
+
+    echo 'Running composer ' . $composerRunType . ' for ' . $toolName . ' ...' . "\n";
+
+    $processOutput = \trim($process->getOutput());
+
+    if ($composerRunType === 'update') {
+        $processOutput = \trim($processOutput . "\n" . $process->getErrorOutput());
+    }
+
+    if (\strlen($processOutput) > 0) {
+        echo $processOutput . "\n";
+    }
+}

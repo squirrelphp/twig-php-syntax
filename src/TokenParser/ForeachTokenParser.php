@@ -2,11 +2,11 @@
 
 namespace Squirrel\TwigPhpSyntax\TokenParser;
 
-use Twig\Error\SyntaxError;
 use Twig\Lexer;
-use Twig\Node\Expression\AssignNameExpression;
+use Twig\Node\Expression\Variable\AssignContextVariable;
 use Twig\Node\ForNode;
 use Twig\Node\Node;
+use Twig\Node\Nodes;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
@@ -35,16 +35,16 @@ class ForeachTokenParser extends AbstractTokenParser
 
         if (\count($targets) > 1) {
             $keyTarget = $targets->getNode('0');
-            $keyTarget = new AssignNameExpression($keyTarget->getAttribute('name'), $keyTarget->getTemplateLine());
+            $keyTarget = new AssignContextVariable($keyTarget->getAttribute('name'), $keyTarget->getTemplateLine());
             $valueTarget = $targets->getNode('1');
-            $valueTarget = new AssignNameExpression($valueTarget->getAttribute('name'), $valueTarget->getTemplateLine());
+            $valueTarget = new AssignContextVariable($valueTarget->getAttribute('name'), $valueTarget->getTemplateLine());
         } else {
-            $keyTarget = new AssignNameExpression('_key', $lineno);
+            $keyTarget = new AssignContextVariable('_key', $lineno);
             $valueTarget = $targets->getNode('0');
-            $valueTarget = new AssignNameExpression($valueTarget->getAttribute('name'), $valueTarget->getTemplateLine());
+            $valueTarget = new AssignContextVariable($valueTarget->getAttribute('name'), $valueTarget->getTemplateLine());
         }
 
-        return new ForNode($keyTarget, $valueTarget, $seq, null, $body, $else, $lineno, $this->getTag());
+        return new ForNode($keyTarget, $valueTarget, $seq, null, $body, $else, $lineno);
     }
 
     public function decideForeachFork(Token $token): bool
@@ -63,7 +63,7 @@ class ForeachTokenParser extends AbstractTokenParser
     }
 
     /*
-     * Taken from ExpressionParser::parseAssignmentExpression, we just exchanged the operator usage
+     * Taken from ExpressionParser::parseAssignmentExpression, we just exchanged the operator usage from , to =>
      */
     private function parseAssignmentExpression(): Node
     {
@@ -71,23 +71,20 @@ class ForeachTokenParser extends AbstractTokenParser
         $targets = [];
         while (true) {
             $token = $this->parser->getCurrentToken();
-            if ($stream->test(Token::OPERATOR_TYPE) && \preg_match(Lexer::REGEX_NAME, $token->getValue())) {
+            if ($stream->test(Token::OPERATOR_TYPE) && preg_match(Lexer::REGEX_NAME, $token->getValue())) {
                 // in this context, string operators are variable names
                 $this->parser->getStream()->next();
             } else {
                 $stream->expect(Token::NAME_TYPE, null, 'Only variables can be assigned to');
             }
-            $value = $token->getValue();
-            if (\in_array(\strtolower($value), ['true', 'false', 'none', 'null'], true)) {
-                throw new SyntaxError(\sprintf('You cannot assign a value to "%s".', $value), $token->getLine(), $stream->getSourceContext());
-            }
-            $targets[] = new AssignNameExpression($value, $token->getLine());
+            $targets[] = new AssignContextVariable($token->getValue(), $token->getLine());
 
+            // The following line is the only change in the whole method: use => instead of ,
             if (!$stream->nextIf(Token::ARROW_TYPE, '=>')) {
                 break;
             }
         }
 
-        return new Node($targets);
+        return new Nodes($targets);
     }
 }

@@ -14,7 +14,7 @@ class IntegrationTest extends IntegrationTestCase
         ];
     }
 
-    public function getFixturesDir(): string
+    public static function getFixturesDirectory(): string
     {
         return __DIR__ . '/Fixtures/';
     }

@@ -25,22 +25,22 @@
                 "conditions": []
             },
             {
-                "action": "composer phpunit",
+                "action": "docker/composer phpunit",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "composer phpstan",
+                "action": "docker/composer phpstan",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "composer psalm",
+                "action": "docker/composer psalm",
                 "options": [],
                 "conditions": []
             },
             {
-                "action": "composer phpcs",
+                "action": "docker/composer phpcs",
                 "options": [],
                 "conditions": []
             }

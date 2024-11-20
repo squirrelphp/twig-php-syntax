@@ -3,8 +3,8 @@
 /vendor
 /vendor-bin/**/vendor
 /vendor-bin/**/composer.lock
-/.phpunit.result.cache
-/.phpcs-cache
 /tests/_output
 /tests/_reports
 /build
+/tools/cache/*
+!/tools/cache/.gitkeep

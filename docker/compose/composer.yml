@@ -1,0 +1,26 @@
+services:
+    composer:
+        image: thecodingmachine/php:8.2-v4-cli
+        container_name: squirrel_composer
+        working_dir: /usr/src/app
+        command: [ "composer", "${COMPOSER_COMMAND}", "--ansi" ]
+        logging:
+            driver: "none"
+        volumes:
+            - .:/usr/src/app
+            - "$HOME/.cache/composer:/tmp/composer_cache"
+        environment:
+            COMPOSER_CACHE_DIR: "/tmp/composer_cache"
+            COMPOSER_ROOT_VERSION: 'dev-master'
+            # Basic config for CLI commands
+            PHP_INI_ERROR_REPORTING: "E_ALL"
+            PHP_INI_MEMORY_LIMIT: "1g"
+            PHP_INI_MAX_EXECUTION_TIME: 3600
+            # Enable Opcache + JIT
+            PHP_INI_OPCACHE__ENABLE_CLI: 1
+            PHP_INI_OPCACHE__MEMORY_CONSUMPTION: 256
+            PHP_INI_OPCACHE__VALIDATE_TIMESTAMPS: 0
+            PHP_INI_JIT_BUFFER_SIZE: "256m"
+            # For code coverage
+            PHP_EXTENSION_XDEBUG: 1
+            XDEBUG_MODE: coverage
