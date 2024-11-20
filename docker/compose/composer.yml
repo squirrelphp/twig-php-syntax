@@ -1,6 +1,6 @@
 services:
     composer:
-        image: thecodingmachine/php:8.2-v4-cli
+        image: thecodingmachine/php:8.0-v4-cli
         container_name: squirrel_composer
         working_dir: /usr/src/app
         command: [ "composer", "${COMPOSER_COMMAND}", "--ansi" ]

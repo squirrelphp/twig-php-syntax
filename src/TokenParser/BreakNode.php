@@ -10,7 +10,7 @@ use Twig\Node\Node;
 class BreakNode extends Node
 {
     public function __construct(
-        private readonly int $loopNumber,
+        private int $loopNumber,
         int $lineno,
     ) {
         parent::__construct([], [], $lineno);
