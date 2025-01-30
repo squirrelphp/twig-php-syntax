@@ -4,6 +4,7 @@ namespace Squirrel\TwigPhpSyntax\TokenParser;
 
 use Twig\Lexer;
 use Twig\Node\Expression\Variable\AssignContextVariable;
+use Twig\Node\ForElseNode;
 use Twig\Node\ForNode;
 use Twig\Node\Node;
 use Twig\Node\Nodes;
@@ -27,7 +28,7 @@ class ForeachTokenParser extends AbstractTokenParser
         $body = $this->parser->subparse([$this, 'decideForeachFork']);
         if ($stream->next()->getValue() === 'else') {
             $stream->expect(Token::BLOCK_END_TYPE);
-            $else = $this->parser->subparse([$this, 'decideForeachEnd'], true);
+            $else = new ForElseNode($this->parser->subparse([$this, 'decideForeachEnd'], true), $stream->getCurrent()->getLine());
         } else {
             $else = null;
         }

@@ -2,12 +2,6 @@
 
 $ignoreErrors = [];
 $ignoreErrors[] = [
-	'message' => '#^Method Squirrel\\\\TwigPhpSyntax\\\\PhpSyntaxExtension\\:\\:getOperators\\(\\) has invalid return type Twig\\\\Extension\\\\OperatorPrecedenceChange\\.$#',
-	'identifier' => 'class.notFound',
-	'count' => 2,
-	'path' => __DIR__ . '/../src/PhpSyntaxExtension.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Squirrel\\\\TwigPhpSyntax\\\\PhpSyntaxExtension\\:\\:validateType\\(\\) should return bool\\|float\\|int\\|string\\|null but returns mixed\\.$#',
 	'identifier' => 'return.type',
 	'count' => 1,

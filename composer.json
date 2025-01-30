@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": ">=8.0.2",
-        "twig/twig": "^3.15"
+        "twig/twig": "^3.19"
     },
     "require-dev": {
         "captainhook/captainhook-phar": "^5.0",
