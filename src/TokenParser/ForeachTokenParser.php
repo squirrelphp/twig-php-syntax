@@ -66,7 +66,7 @@ class ForeachTokenParser extends AbstractTokenParser
     /*
      * Taken from ExpressionParser::parseAssignmentExpression, we just exchanged the operator usage from , to =>
      */
-    private function parseAssignmentExpression(): Node
+    protected function parseAssignmentExpression(): Nodes
     {
         $stream = $this->parser->getStream();
         $targets = [];
