@@ -17,8 +17,8 @@
         }
     ],
     "require": {
-        "php": ">=8.0.2",
-        "twig/twig": "^3.19"
+        "php": ">=8.1",
+        "twig/twig": "^3.21"
     },
     "require-dev": {
         "captainhook/captainhook-phar": "^5.0",
@@ -56,7 +56,7 @@
         "psalm": "vendor-bin/psalm/vendor/bin/psalm --config=tools/psalm.xml --show-info=false",
         "psalm_full": "vendor-bin/psalm/vendor/bin/psalm --config=tools/psalm.xml --clear-cache && vendor-bin/psalm/vendor/bin/psalm --config=tools/psalm.xml --show-info=false",
         "psalm_base": "vendor-bin/psalm/vendor/bin/psalm --config=tools/psalm.xml --set-baseline=tools/psalm-baseline.xml",
-        "phpunit": "vendor/bin/phpunit --configuration=tools/phpunit.xml.dist --colors=always",
+        "phpunit": "vendor/bin/phpunit --configuration=tools/phpunit.xml.dist --colors=always --verbose",
         "coverage": "XDEBUG_MODE=coverage vendor/bin/phpunit --configuration=tools/phpunit.xml.dist --coverage-html=tests/_reports",
         "phpcs": "vendor-bin/phpcs/vendor/bin/phpcs --standard=tools/ruleset.xml --extensions=php --cache=tools/cache/.phpcs-cache --colors src tests",
         "phpcs_diff": "vendor-bin/phpcs/vendor/bin/phpcs -s --standard=tools/ruleset.xml --extensions=php --cache=tools/cache/.phpcs-cache --colors src tests",

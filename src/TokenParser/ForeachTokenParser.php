@@ -20,7 +20,7 @@ class ForeachTokenParser extends AbstractTokenParser
     {
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
-        $seq = $this->parser->getExpressionParser()->parseExpression();
+        $seq = $this->parser->parseExpression();
         $stream->expect(Token::NAME_TYPE, 'as');
         $targets = $this->parseAssignmentExpression();
 
@@ -81,7 +81,7 @@ class ForeachTokenParser extends AbstractTokenParser
             $targets[] = new AssignContextVariable($token->getValue(), $token->getLine());
 
             // The following line is the only change in the whole method: use => instead of ,
-            if (!$stream->nextIf(Token::ARROW_TYPE, '=>')) {
+            if (!$stream->nextIf(Token::OPERATOR_TYPE, '=>')) {
                 break;
             }
         }
