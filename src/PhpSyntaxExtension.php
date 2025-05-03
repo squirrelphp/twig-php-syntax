@@ -2,6 +2,7 @@
 
 namespace Squirrel\TwigPhpSyntax;
 
+use Squirrel\TwigPhpSyntax\ExpressionParser\BinaryOperatorExpressionParser;
 use Squirrel\TwigPhpSyntax\Operator\NotSameAsBinary;
 use Squirrel\TwigPhpSyntax\Operator\SameAsBinary;
 use Squirrel\TwigPhpSyntax\Test\ArrayTest;
@@ -17,7 +18,6 @@ use Squirrel\TwigPhpSyntax\Test\TrueTest;
 use Squirrel\TwigPhpSyntax\TokenParser\BreakTokenParser;
 use Squirrel\TwigPhpSyntax\TokenParser\ContinueTokenParser;
 use Squirrel\TwigPhpSyntax\TokenParser\ForeachTokenParser;
-use Twig\ExpressionParser\Infix\BinaryOperatorExpressionParser;
 use Twig\Extension\AbstractExtension;
 use Twig\Node\Expression\Binary\AndBinary;
 use Twig\Node\Expression\Binary\OrBinary;
