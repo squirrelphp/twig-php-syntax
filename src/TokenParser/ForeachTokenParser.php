@@ -11,11 +11,12 @@ use Twig\Node\Nodes;
 use Twig\Token;
 use Twig\TokenParser\AbstractTokenParser;
 
-class ForeachTokenParser extends AbstractTokenParser
+final class ForeachTokenParser extends AbstractTokenParser
 {
     /*
      * Taken from ForTokenParser, we just exchanged small parts of it to support the slightly different syntax
      */
+    #[\Override]
     public function parse(Token $token): Node
     {
         $lineno = $token->getLine();
@@ -58,6 +59,7 @@ class ForeachTokenParser extends AbstractTokenParser
         return $token->test('endforeach');
     }
 
+    #[\Override]
     public function getTag(): string
     {
         return 'foreach';
@@ -66,6 +68,7 @@ class ForeachTokenParser extends AbstractTokenParser
     /*
      * Taken from ExpressionParser::parseAssignmentExpression, we just exchanged the operator usage from , to =>
      */
+    #[\Override]
     protected function parseAssignmentExpression(): Nodes
     {
         $stream = $this->parser->getStream();

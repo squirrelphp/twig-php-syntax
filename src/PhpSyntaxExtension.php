@@ -3,8 +3,6 @@
 namespace Squirrel\TwigPhpSyntax;
 
 use Squirrel\TwigPhpSyntax\ExpressionParser\BinaryOperatorExpressionParser;
-use Squirrel\TwigPhpSyntax\Operator\NotSameAsBinary;
-use Squirrel\TwigPhpSyntax\Operator\SameAsBinary;
 use Squirrel\TwigPhpSyntax\Test\ArrayTest;
 use Squirrel\TwigPhpSyntax\Test\BooleanTest;
 use Squirrel\TwigPhpSyntax\Test\CallableTest;
@@ -24,8 +22,9 @@ use Twig\Node\Expression\Binary\OrBinary;
 use Twig\TwigFilter;
 use Twig\TwigTest;
 
-class PhpSyntaxExtension extends AbstractExtension
+final class PhpSyntaxExtension extends AbstractExtension
 {
+    #[\Override]
     public function getTokenParsers(): array
     {
         return [
@@ -35,6 +34,7 @@ class PhpSyntaxExtension extends AbstractExtension
         ];
     }
 
+    #[\Override]
     public function getFilters(): array
     {
         return [
@@ -103,6 +103,7 @@ class PhpSyntaxExtension extends AbstractExtension
         return $var;
     }
 
+    #[\Override]
     public function getTests(): array
     {
         return [
@@ -131,13 +132,12 @@ class PhpSyntaxExtension extends AbstractExtension
         ];
     }
 
+    #[\Override]
     public function getExpressionParsers(): array
     {
         return [
             new BinaryOperatorExpressionParser(OrBinary::class, '||', 10),
             new BinaryOperatorExpressionParser(AndBinary::class, '&&', 15),
-            new BinaryOperatorExpressionParser(SameAsBinary::class, '===', 20),
-            new BinaryOperatorExpressionParser(NotSameAsBinary::class, '!==', 20),
         ];
     }
 }

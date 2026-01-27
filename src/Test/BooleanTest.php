@@ -11,8 +11,9 @@ use Twig\Node\Expression\TestExpression;
  *  {{ var is boolean }}
  *  {{ var is bool }}
  */
-class BooleanTest extends TestExpression
+final class BooleanTest extends TestExpression
 {
+    #[\Override]
     public function compile(Compiler $compiler): void
     {
         $compiler

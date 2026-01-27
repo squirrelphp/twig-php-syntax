@@ -53,6 +53,8 @@ Features
 
 Twig has the `same as` test, which mimicks `===` in PHP, but has a syntax that can be hard to get used to. Using the strict comparison operators from PHP (`===` and `!==`) reduces friction, is familiar and less verbose.
 
+Twig >=3.23 implemented `===` and `!==` natively, so this functionality is provided by Twig when using Twig version >=3.23.
+
 ```twig
 {% if 1 === 1 %}
 This will be shown

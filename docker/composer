@@ -2,4 +2,8 @@
 # Get directory of this script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# Remove all running docker containers
+COMPOSER_COMMAND="$@" docker compose -f "$DIR/compose/composer.yml" --project-directory "$DIR/.." --project-name=squirrel_composer down --volumes --remove-orphans
+
+# Run composer with given arguments
 COMPOSER_COMMAND="$@" docker compose -f "$DIR/compose/composer.yml" --project-directory "$DIR/.." --project-name=squirrel_composer up --abort-on-container-exit --exit-code-from=composer --no-log-prefix composer 2>&1

@@ -10,8 +10,9 @@ use Twig\Node\Expression\TestExpression;
  *
  *  {{ var is scalar }}
  */
-class ScalarTest extends TestExpression
+final class ScalarTest extends TestExpression
 {
+    #[\Override]
     public function compile(Compiler $compiler): void
     {
         $compiler

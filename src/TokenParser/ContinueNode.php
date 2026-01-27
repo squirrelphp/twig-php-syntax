@@ -7,15 +7,16 @@ use Twig\Compiler;
 use Twig\Node\Node;
 
 #[YieldReady]
-class ContinueNode extends Node
+final class ContinueNode extends Node
 {
     public function __construct(
-        private int $loopNumber,
+        private readonly int $loopNumber,
         int $lineno,
     ) {
         parent::__construct([], [], $lineno);
     }
 
+    #[\Override]
     public function compile(Compiler $compiler): void
     {
         $compiler

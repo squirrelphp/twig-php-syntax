@@ -11,8 +11,9 @@ use Twig\Node\Expression\TestExpression;
  *  {{ var is int }}
  *  {{ var is integer }}
  */
-class IntegerTest extends TestExpression
+final class IntegerTest extends TestExpression
 {
+    #[\Override]
     public function compile(Compiler $compiler): void
     {
         $compiler

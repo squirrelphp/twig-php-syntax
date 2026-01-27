@@ -11,6 +11,7 @@ abstract class BreakOrContinueTokenParser extends AbstractTokenParser
 {
     abstract protected function getNodeObject(int $loopNumber, int $lineno): Node;
 
+    #[\Override]
     public function parse(Token $token): Node
     {
         $lineno = $token->getLine();

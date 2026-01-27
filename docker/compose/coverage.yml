@@ -1,0 +1,30 @@
+services:
+    coverage:
+        image: thecodingmachine/php:8.4-v5-cli
+        container_name: squirrel_coverage
+        tty: true
+        working_dir: /usr/src/app
+        command: [ "vendor/bin/phpunit", "--configuration=tools/phpunit.xml.dist", "--colors=always", "--coverage-html", "tests/_reports"]
+        volumes:
+            - .:/usr/src/app
+            - "$HOME/.cache/composer:/tmp/composer_cache"
+        environment:
+            # Basic config for CLI commands
+            PHP_INI_ERROR_REPORTING: "E_ALL"
+            PHP_INI_MEMORY_LIMIT: "1g"
+            PHP_INI_MAX_EXECUTION_TIME: 3600
+            # Enable Opcache, disable JIT
+            PHP_INI_OPCACHE__ENABLE_CLI: 1
+            PHP_INI_OPCACHE__MEMORY_CONSUMPTION: 256
+            PHP_INI_OPCACHE__VALIDATE_TIMESTAMPS: 0
+            PHP_INI_OPCACHE__JIT: "disable"
+            # Composer config to use global cache
+            COMPOSER_CACHE_DIR: "/tmp/composer_cache"
+            COMPOSER_ROOT_VERSION: 'dev-master'
+            # Enable XDEBUG for coverage
+            PHP_EXTENSION_XDEBUG: 1
+            XDEBUG_MODE: coverage
+            #PHP_EXTENSION_PCOV: 1
+            # Install all composer dependencies before running tests + delete previous coverage report
+            STARTUP_COMMAND_1: composer --no-interaction --no-progress --no-scripts --no-plugins --quiet install
+            STARTUP_COMMAND_2: rm -rf /usr/src/app/tests/_reports/*

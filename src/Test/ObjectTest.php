@@ -10,8 +10,9 @@ use Twig\Node\Expression\TestExpression;
  *
  *  {{ var is object }}
  */
-class ObjectTest extends TestExpression
+final class ObjectTest extends TestExpression
 {
+    #[\Override]
     public function compile(Compiler $compiler): void
     {
         $compiler

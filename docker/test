@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Get directory of this script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# Remove all running docker containers
+docker compose -f "$DIR/compose/test.yml" --project-directory "$DIR/.." --project-name=squirrel_test down --volumes --remove-orphans
+
+# Run tests
+docker compose -f "$DIR/compose/test.yml" --project-directory "$DIR/.." --project-name=squirrel_test up --abort-on-container-exit --exit-code-from=test test
+
+# Remove all running docker containers
+docker compose -f "$DIR/compose/test.yml" --project-directory "$DIR/.." --project-name=squirrel_test down --volumes --remove-orphans
